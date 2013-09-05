@@ -31,7 +31,7 @@
     <copy todir="${outdir}/marketplace">
       <fileset dir="src/main/resources" />
       <filterset>
-        <filter token="VERSION" value="${kerberos.auth.version}" />
+        <filter token="VERSION" value="${maven.project.version}" />
         <filter token="DISTRIB_VERSION" value="${nuxeo.distribution.version}" />
       </filterset>
     </copy>
@@ -46,8 +46,6 @@
       <artifact:set>
         <includes>
           <artifact groupId="org.nuxeo*" scope="!test" type="!pom" />
-          <!-- Include your artifacts using their groupId for instance -->
-          <artifact groupId="com.nuxeo*" scope="!test" type="!pom" />
         </includes>
       </artifact:set>
     </copy>
@@ -57,10 +55,6 @@
         <includes>
           <artifact groupId="!org.nuxeo*" scope="!test" />
         </includes>
-        <excludes>
-          <!-- Filter out your artifacts using their groupId for instance -->
-          <artifact groupId="com.nuxeo*" />
-        </excludes>
       </artifact:set>
     </copy>
     <move todir="${outdir}/nxr/lib">
@@ -71,17 +65,17 @@
     </move>
     <nx:rmdups dir="${outdir}/nxr/lib" />
     <!-- Temporary ZIP Nuxeo NXR to compare with base distribution NXR -->
-    <zip destfile="${outdir}/nxr-${kerberos.auth.version}.zip"
+    <zip destfile="${outdir}/nxr-${maven.project.version}.zip"
          basedir="${outdir}/nxr" />
 
     <!-- Your MP only needs to include files not already provided by the base distribution -->
-    <nx:zipdiff file1="${outdir}/nxr-${kerberos.auth.version}.zip"
+    <nx:zipdiff file1="${outdir}/nxr-${maven.project.version}.zip"
                 file2="${outdir}/nuxeo-distribution-cap-${nuxeo.distribution.version}.zip"
                 includesfile="${outdir}/includes"
                 excludesfile="${outdir}/excludesfile"
                 patternsetid="kerberos.versus.cap">
     </nx:zipdiff>
-    <unzip src="${outdir}/nxr-${kerberos.auth.version}.zip"
+    <unzip src="${outdir}/nxr-${maven.project.version}.zip"
            dest="${outdir}/marketplace/install">
       <patternset refid="kerberos.versus.cap" />
     </unzip>
@@ -93,7 +87,6 @@
          value="${install.content}${line.separator}
   &lt;update file=&quot;${package.root}/install/bundles&quot; todir=&quot;${env.bundles}&quot; /&gt;${line.separator}
   &lt;copy dir=&quot;${package.root}/install/java.login.config&quot; todir=&quot;${env.server.home}&quot; /&gt;${line.separator}" />
-    <!-- Optional: use this if you need your MP to deploy and/or activate a dedicated template -->
     <if>
       <available file="${outdir}/marketplace/install/templates" />
       <then>
@@ -110,9 +103,9 @@
     <echo file="${outdir}/marketplace/install.xml"
           message="${install.content}" />
 
-    <zip destfile="${outdir}/${maven.project.artifactId}-${kerberos.auth.version}.zip"
+    <zip destfile="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip"
          basedir="${outdir}/marketplace" />
-    <artifact:attach file="${outdir}/${maven.project.artifactId}-${kerberos.auth.version}.zip"
+    <artifact:attach file="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip"
                      target="${maven.project.groupId}:${maven.project.artifactId}"
                      type="zip" />
   </target>
