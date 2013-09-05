@@ -94,7 +94,7 @@
              value="${install.content}${line.separator}
   &lt;copy dir=&quot;${package.root}/install/templates&quot; todir=&quot;${env.templates}&quot; overwrite=&quot;true&quot; /&gt;${line.separator}
   &lt;config addtemplate=&quot;kerberos&quot; /&gt;${line.separator}
-  &lt;config set=&quot;JAVA_OPTS=$JAVA_OPTS -Djava.security.auth.login.config=./java.login.config&quot; /&gt;${line.separator}" />
+  &lt;config set=&quot;JAVA_OPTS=$JAVA_OPTS -Djava.security.auth.login.config=${nuxeo.home}/java.login.config&quot; /&gt;${line.separator}" />
       </then>
     </if>
     <var name="install.content"
