@@ -73,6 +73,8 @@
                 file2="${outdir}/nuxeo-distribution-cap-${nuxeo.distribution.version}.zip"
                 includesfile="${outdir}/includes"
                 excludesfile="${outdir}/excludesfile"
+                ignoreContent="true"
+                ignoreContentPattern=".*SNAPSHOT\\.jar$"
                 patternsetid="kerberos.versus.cap">
     </nx:zipdiff>
     <unzip src="${outdir}/nxr-${maven.project.version}.zip"
