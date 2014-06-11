@@ -1,4 +1,4 @@
-<project name="nuxeo-assembly"
+<project name="kerberos-assembly"
          default="build"
          xmlns:nx="urn:nuxeo-build"
          xmlns:artifact="urn:nuxeo-artifact">
@@ -108,7 +108,6 @@
     <zip destfile="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip"
          basedir="${outdir}/marketplace" />
     <artifact:attach file="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip"
-                     target="${maven.project.groupId}:${maven.project.artifactId}"
                      type="zip" />
   </target>
 
