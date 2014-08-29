@@ -17,4 +17,5 @@
   </platforms>
   <license>LGPL</license>
   <license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
+  <visibility>PUBLIC</visibility>
 </package>
