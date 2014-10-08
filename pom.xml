@@ -6,39 +6,25 @@
     <version>5.9.6-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.nuxeo.ecm.platform</groupId>
-  <artifactId>kerberos-authentication</artifactId>
-  <version>1.2.4-SNAPSHOT</version>
-  <packaging>zip</packaging>
-  <name>SPNEGO/Kerberos Authentication</name>
+  <groupId>org.nuxeo.marketplace.kerberos</groupId>
+  <artifactId>parent</artifactId>
+  <packaging>pom</packaging>
+  <name>Nuxeo Kerberos authentication parent</name>
+  <description>Convenience POM for running sub-modules</description>
+  <version>1.3.0-SNAPSHOT</version>
 
-  <dependencies>
-    <!-- Base distribution(s) for the MP -->
-    <dependency>
-      <groupId>org.nuxeo.ecm.distribution</groupId>
-      <artifactId>nuxeo-distribution-cap</artifactId>
-      <type>pom</type>
-    </dependency>
-    <!-- Additional bundles to be deployed by the MP -->
-    <dependency>
-      <groupId>org.nuxeo.ecm.platform</groupId>
-      <artifactId>nuxeo-platform-login-kerberos</artifactId>
-    </dependency>
-  </dependencies>
+  <modules>
+    <module>marketplace</module>
+  </modules>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.nuxeo.build</groupId>
-        <artifactId>ant-assembly-maven-plugin</artifactId>
-        <configuration>
-          <buildFiles>
-            <buildFile>${basedir}/src/main/assemble/assembly.xml</buildFile>
-          </buildFiles>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  <profiles>
+    <profile>
+      <id>ftest</id>
+      <modules>
+        <module>ftest/startup</module>
+      </modules>
+    </profile>
+  </profiles>
 
   <repositories>
     <repository>

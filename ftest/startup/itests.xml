@@ -1,0 +1,101 @@
+<project name="nuxeo-kerberos-tests"
+         xmlns:nx="urn:nuxeo-build"
+         xmlns:artifact="urn:nuxeo-artifact">
+  <taskdef resource="org/nuxeo/build/antlib.xml" uri="urn:nuxeo-build" />
+  <taskdef resource="org/nuxeo/build/artifact/antlib.xml"
+           uri="urn:nuxeo-artifact" />
+  <taskdef resource="net/sf/antcontrib/antlib.xml" />
+
+  <!-- Base distribution (nuxeo-cap, nuxeo-dm, ...) -->
+  <property name="wizard.preset" value="nuxeo-cap" />
+
+  <property name="out.dir" value="${maven.project.build.directory}" />
+  <unzip dest="${out.dir}/" overwrite="false">
+    <artifact:resolveFile key="org.nuxeo:nuxeo-ftest::zip" />
+  </unzip>
+  <import file="${out.dir}/nuxeo-ftest.xml" />
+
+  <!-- Override default prepare-environment target to make it download your MP -->
+  <target name="prepare-environment"
+          depends="_init,prepare-db,prepare-tomcat,prepare-jboss">
+    <copy todir="${out.dir}">
+      <artifact:resolveFile key="org.nuxeo.marketplace.kerberos:marketplace::zip" />
+    </copy>
+    <antcall target="set-conf">
+      <param name="name" value="kerberos.keytab" />
+      <param name="value" value="/opt/build/keystores/keytabs/jenkins.keytab" />
+    </antcall>
+    <antcall target="set-conf">
+      <param name="name" value="kerberos.principal" />
+      <param name="value" value="HTTP/jenkins@AD.IN.NUXEO.COM" />
+    </antcall>
+  </target>
+
+  <target name="start" depends="_init,stop,configure-unix,configure-windows,start-unix,start-windows" />
+
+  <target name="configure-unix" depends="mp-install-unix" if="osfamily-unix">
+    <chmod dir="${nuxeo.home}/bin" perm="ug+x" includes="*.sh,*ctl" />
+    <exec executable="${nuxeo.home}/bin/nuxeoctl"
+          spawn="false"
+          failonerror="true">
+      <arg value="configure" />
+      <arg value="--force" />
+      <env key="LAUNCHER_DEBUG" value="${launcher.debug}" />
+    </exec>
+  </target>
+
+  <target name="configure-windows" depends="mp-install-windows" if="osfamily-windows">
+    <exec executable="${nuxeo.home}/bin/nuxeoctl.bat"
+          spawn="false"
+          failonerror="false"
+          resultproperty="retcode">
+      <arg value="--gui=false" />
+      <arg value="configure" />
+      <arg value="--force" />
+      <env key="LAUNCHER_DEBUG" value="${launcher.debug}" />
+    </exec>
+  </target>
+
+  <target name="mp-install-unix" if="osfamily-unix">
+    <chmod dir="${nuxeo.home}/bin" perm="ug+x" includes="*.sh,*ctl" />
+    <exec executable="${nuxeo.home}/bin/nuxeoctl"
+          spawn="false"
+          failonerror="true">
+      <arg value="--accept=true" />
+      <arg value="mp-install" />
+      <arg value="${out.dir}/marketplace-${maven.project.version}.zip" />
+      <arg value="--force" />
+      <env key="LAUNCHER_DEBUG" value="${launcher.debug}" />
+    </exec>
+  </target>
+
+  <target name="mp-install-windows" if="osfamily-windows">
+    <exec executable="${nuxeo.home}/bin/nuxeoctl.bat"
+          spawn="false"
+          failonerror="false"
+          resultproperty="retcode">
+      <arg value="--gui=false" />
+      <arg value="--accept=true" />
+      <arg value="mp-install" />
+      <arg value="${out.dir}/marketplace-${maven.project.version}.zip" />
+      <arg value="--force" />
+      <env key="LAUNCHER_DEBUG" value="${launcher.debug}" />
+    </exec>
+  </target>
+
+  <target name="check-for-errors">
+    <loadfile srcFile="${nuxeo.home}/log/server.log" property="server.log.errors">
+      <filterchain>
+        <linecontains>
+          <contains value=" ERROR " />
+        </linecontains>
+      </filterchain>
+    </loadfile>
+    <fail message="ERROR found in server.log">
+      <condition>
+        <isset property="server.log.errors" />
+      </condition>
+    </fail>
+  </target>
+
+</project>

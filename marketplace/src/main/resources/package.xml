@@ -15,7 +15,7 @@
     <platform>cap-@DISTRIB_VERSION@</platform>
     <platform>cap-@DISTRIB_VERSION@-HF*</platform>
   </platforms>
-  <license>LGPL</license>
+  <license>LGPL 2.1</license>
   <license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
   <visibility>PUBLIC</visibility>
 </package>

@@ -3,7 +3,7 @@ Nuxeo {
    debug=true
    storeKey=true
    useKeyTab=true
-   keyTab="/full/path/to/keytab"
-   principal="HTTP/SERVER_NAME@REALM";
+   keyTab="${kerberos.keytab}"
+   principal="${kerberos.principal}";
 };
 
