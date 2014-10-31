@@ -14,7 +14,7 @@
   <name>Marketplace package for Kerberos authentication</name>
 
   <properties>
-    <nuxeo.distribution.version>5.9.6-SNAPSHOT</nuxeo.distribution.version>
+    <nuxeo.distribution.version>6.0-SNAPSHOT</nuxeo.distribution.version>
   </properties>
 
   <dependencyManagement>
