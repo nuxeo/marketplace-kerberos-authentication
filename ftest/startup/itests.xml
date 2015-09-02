@@ -9,9 +9,10 @@
   </unzip>
   <import file="${out.dir}/nuxeo-ftest.xml" />
 
+  <property name="mp.install" value="file:${out.dir}/marketplace-${maven.project.version}.zip" />
   <target name="prepare-environment" depends="_init,prepare-db,prepare-tomcat,prepare-jboss">
     <copy todir="${out.dir}">
-      <artifact:resolveFile key="org.nuxeo.marketplace.kerberos:marketplace::zip" />
+      <artifact:file key="org.nuxeo.marketplace.kerberos:marketplace::zip" />
     </copy>
     <antcall target="set-conf">
       <param name="name" value="kerberos.keytab" />
@@ -21,35 +22,6 @@
       <param name="name" value="kerberos.principal" />
       <param name="value" value="HTTP/jenkins@AD.IN.NUXEO.COM" />
     </antcall>
-  </target>
-
-  <target name="start" depends="_init,stop,mp-install-unix,mp-install-windows,start-unix,start-windows" />
-
-  <target name="mp-install-unix" if="osfamily-unix">
-    <chmod dir="${nuxeo.home}/bin" perm="ug+x" includes="*.sh,*ctl" />
-    <exec executable="${nuxeo.home}/bin/nuxeoctl"
-          spawn="false"
-          failonerror="true">
-      <arg value="--accept=true" />
-      <arg value="mp-install" />
-      <arg value="${out.dir}/marketplace-${maven.project.version}.zip" />
-      <arg value="--force" />
-      <env key="LAUNCHER_DEBUG" value="${launcher.debug}" />
-    </exec>
-  </target>
-
-  <target name="mp-install-windows" if="osfamily-windows">
-    <exec executable="${nuxeo.home}/bin/nuxeoctl.bat"
-          spawn="false"
-          failonerror="false"
-          resultproperty="retcode">
-      <arg value="--gui=false" />
-      <arg value="--accept=true" />
-      <arg value="mp-install" />
-      <arg value="${out.dir}/marketplace-${maven.project.version}.zip" />
-      <arg value="--force" />
-      <env key="LAUNCHER_DEBUG" value="${launcher.debug}" />
-    </exec>
   </target>
 
   <target name="check-for-errors">

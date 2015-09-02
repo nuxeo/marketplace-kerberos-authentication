@@ -18,6 +18,17 @@
     <module>marketplace</module>
   </modules>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.nuxeo.marketplace.kerberos</groupId>
+        <artifactId>marketplace</artifactId>
+        <version>${project.version}</version>
+        <type>zip</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <profiles>
     <profile>
       <id>ftest</id>

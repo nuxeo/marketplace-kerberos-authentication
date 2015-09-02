@@ -13,28 +13,17 @@
   <packaging>zip</packaging>
   <name>Marketplace package for Kerberos authentication</name>
 
-  <properties>
-    <nuxeo.distribution.version>7.4-SNAPSHOT</nuxeo.distribution.version>
-  </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <!-- Import Nuxeo BOM -->
-      <dependency>
-        <groupId>org.nuxeo.ecm.distribution</groupId>
-        <artifactId>nuxeo-distribution</artifactId>
-        <version>${nuxeo.distribution.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <dependencies>
     <dependency>
       <groupId>org.nuxeo.ecm.distribution</groupId>
       <artifactId>nuxeo-distribution-cap</artifactId>
       <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.distribution</groupId>
+      <artifactId>nuxeo-distribution-cap</artifactId>
+      <type>zip</type>
+      <scope>provided</scope>
     </dependency>
 
     <!-- Additional bundles to be deployed by the MP -->

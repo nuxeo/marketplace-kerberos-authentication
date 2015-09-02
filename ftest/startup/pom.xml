@@ -14,38 +14,8 @@
   <description>Kerberos server startup test (check kerberos module)</description>
 
   <properties>
-    <!-- Copy some properties from org.nuxeo:nuxeo-ecm if not inheriting -->
-    <!-- <ant.assembly.version>2.0.2</ant.assembly.version> -->
-    <nuxeo.distribution.version>7.4-SNAPSHOT</nuxeo.distribution.version>
     <some.password>setTheValueInYourSettings</some.password>
   </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <!-- Import Nuxeo BOM -->
-      <dependency>
-        <groupId>org.nuxeo.ecm.distribution</groupId>
-        <artifactId>nuxeo-distribution</artifactId>
-        <version>${nuxeo.distribution.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.nuxeo.ecm.distribution</groupId>
-        <artifactId>nuxeo-distribution-tomcat</artifactId>
-        <version>${nuxeo.distribution.version}</version>
-        <classifier>nuxeo-cap</classifier>
-        <type>zip</type>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.nuxeo.marketplace.kerberos</groupId>
-        <artifactId>marketplace</artifactId>
-        <version>${project.version}</version>
-        <type>zip</type>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -57,17 +27,19 @@
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
     </dependency>
-    <!--
     <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-server-standalone</artifactId>
+      <groupId>org.nuxeo.marketplace.kerberos</groupId>
+      <artifactId>marketplace</artifactId>
+      <type>zip</type>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.nuxeo.ecm.distribution</groupId>
-      <artifactId>nuxeo-functional-tests</artifactId>
+      <artifactId>nuxeo-distribution-tomcat</artifactId>
+      <classifier>nuxeo-cap</classifier>
+      <type>zip</type>
       <scope>test</scope>
     </dependency>
-    -->
   </dependencies>
 
   <build>
