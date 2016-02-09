@@ -14,21 +14,8 @@
   <name>Marketplace package for Kerberos authentication</name>
 
   <properties>
-    <nuxeo.distribution.version>6.0</nuxeo.distribution.version>
+    <target.distribution.version>6.0</target.distribution.version>
   </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <!-- Import Nuxeo BOM -->
-      <dependency>
-        <groupId>org.nuxeo.ecm.distribution</groupId>
-        <artifactId>nuxeo-distribution</artifactId>
-        <version>${nuxeo.distribution.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <dependency>
