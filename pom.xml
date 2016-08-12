@@ -11,7 +11,7 @@
   <packaging>pom</packaging>
   <name>Nuxeo Kerberos authentication parent</name>
   <description>Convenience POM for running sub-modules</description>
-  <version>1.5.3-SNAPSHOT</version>
+  <version>1.5.4-SNAPSHOT</version>
 
   <modules>
     <module>marketplace</module>
