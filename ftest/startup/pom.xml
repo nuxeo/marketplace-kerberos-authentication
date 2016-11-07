@@ -34,8 +34,7 @@
     </dependency>
     <dependency>
       <groupId>org.nuxeo.ecm.distribution</groupId>
-      <artifactId>nuxeo-distribution-tomcat</artifactId>
-      <classifier>nuxeo-cap</classifier>
+      <artifactId>nuxeo-server-tomcat</artifactId>
       <type>zip</type>
       <scope>test</scope>
     </dependency>
@@ -99,7 +98,6 @@
               <targets>
                 <target>stop</target>
                 <target>cleanup-environment</target>
-                <target>check-for-errors</target>
               </targets>
             </configuration>
           </execution>
