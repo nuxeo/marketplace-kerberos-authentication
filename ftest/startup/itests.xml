@@ -10,7 +10,7 @@
   <import file="${out.dir}/nuxeo-ftest.xml" />
 
   <property name="mp.install" value="file:${out.dir}/marketplace-${maven.project.version}.zip" />
-  <target name="prepare-environment" depends="_init,prepare-db,prepare-tomcat,prepare-jboss">
+  <target name="prepare-environment" depends="_init,prepare-db,prepare-tomcat">
     <copy todir="${out.dir}">
       <artifact:file key="org.nuxeo.marketplace.kerberos:marketplace::zip" />
     </copy>
@@ -22,21 +22,6 @@
       <param name="name" value="kerberos.principal" />
       <param name="value" value="HTTP/jenkins@AD.IN.NUXEO.COM" />
     </antcall>
-  </target>
-
-  <target name="check-for-errors">
-    <loadfile srcFile="${nuxeo.home}/log/server.log" property="server.log.errors">
-      <filterchain>
-        <linecontains>
-          <contains value=" ERROR " />
-        </linecontains>
-      </filterchain>
-    </loadfile>
-    <fail message="ERROR found in server.log">
-      <condition>
-        <isset property="server.log.errors" />
-      </condition>
-    </fail>
   </target>
 
 </project>
