@@ -4,7 +4,7 @@
   <description>
     <p>Enable Kerberos authentication to Nuxeo.</p>
   </description>
-  <home-page>http://doc.nuxeo.com/</home-page>
+  <home-page>https://doc.nuxeo.com/nxdoc/kerberos-authentication/</home-page>
   <vendor>Nuxeo</vendor>
   <installer restart="true" />
   <uninstaller restart="true" />
