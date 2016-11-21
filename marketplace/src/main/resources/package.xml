@@ -2,7 +2,7 @@
 <package type="addon" name="kerberos-authentication" version="@VERSION@">
   <title>Kerberos Authentication</title>
   <description>
-    <p>Enable Kerberos authentication to Nuxeo.</p>
+    <p>The Kerberos Authentication addon allows your users to log in to the Nuxeo Platform by authenticating to a Kerberos server (eg. Active Directory).</p>
   </description>
   <home-page>https://doc.nuxeo.com/nxdoc/kerberos-authentication/</home-page>
   <vendor>Nuxeo</vendor>
